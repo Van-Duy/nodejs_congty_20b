@@ -1,9 +1,9 @@
 
-const { findAll , create } = require("../services/user.services")
+const { findAll, createUser } = require("../services/user.services")
 
 
-const getAllUser = (req, res) => {
-    let data = findAll()
+const getAllUser = async  (req, res) => {
+    let data =  await findAll()
     res.json({
         message: "Get All User",
         data
@@ -16,8 +16,8 @@ const getUserById = (req, res) => {
     })
 }
 
-const addUser = (req, res) => {
-    create(req.body)
+const addUser = async (req, res) => {
+    await createUser(req.body)
     res.json({
         message: "Add User",
       

@@ -1,15 +1,15 @@
 
 const UserModel = require('../models/user.model')
 
-const findAll = () => {
-    // call database
-    return [{id : 1 , name : "duy"}]
+const findAll = async () => {
+    let data = await UserModel.find({});
+    return data
 }
 
-const create = (body) => {
-    UserModel.create(body)
+const createUser = async (body) => {
+    await UserModel.create(body)
     return true
 }
 
 
-module.exports = { findAll, create }
+module.exports = { findAll, createUser }
