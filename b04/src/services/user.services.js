@@ -2,6 +2,7 @@
 const UserModel = require('../models/user.model')
 
 const findAll = async () => {
+    // let data = await pool.connect(`select * form users`)
     let data = await UserModel.find({});
     return data
 }

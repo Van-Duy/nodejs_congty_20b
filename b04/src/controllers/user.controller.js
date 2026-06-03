@@ -10,6 +10,10 @@ const getAllUser = async  (req, res) => {
     })
 }
 
+// xoa 
+// getOne
+
+
 const getUserById = (req, res) => {
     res.json({
         message: "getUserById",
