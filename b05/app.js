@@ -18,4 +18,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/v1', indexRouter);
 
+
+app.use((error , req , res , next) => {
+    console.log("error", error.message)
+    return res.status(500).json({
+        message : error.message
+    })
+})
+
 module.exports = app;

@@ -1,5 +1,5 @@
 
-const { findAll, findById, createUser, deleteUser } = require("../services/user.services")
+const { findAll, findById, createUser, deleteUser, editUser } = require("../services/user.services")
 
 
 const getAllUser = async  (req, res) => {
@@ -33,6 +33,27 @@ const addUser = async (req, res) => {
     })
 }
 
+
+const updateUser = async (req, res) => {
+    let { id } = req.params;
+    let userData = req.body;
+
+    if (!id) throw Error("Not find By id")
+    // check id có phải là id của mongdb hay không
+
+    const idFind = await findById(id);
+    if (!idFind) throw Error("Not find By id")
+
+    
+
+    let isOk = await editUser(id, userData);
+    res.json({
+        message: "Edit User",
+        metaData: {}
+    })
+}
+
+
 const removeUser = async (req, res) => {
     const { id } = req.params;
 
@@ -44,4 +65,4 @@ const removeUser = async (req, res) => {
     });
 }
 
-module.exports = { getAllUser, addUser, getUserById, removeUser }
+module.exports = { updateUser  , getAllUser, addUser, getUserById, removeUser }
