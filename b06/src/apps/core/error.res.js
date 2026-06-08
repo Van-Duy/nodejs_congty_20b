@@ -3,12 +3,11 @@ const status_code = require("./statusCode")
 
 
 class ErrorCustom extends Error {
-    constructor( message , status) {
+    constructor(message , status) {
         super(message),
         this.status = status
     }
 }
-
 
 class BAD_REQUEST_ERROR extends ErrorCustom {
     constructor(message = status_message.BAD_REQUEST, status = status_code.BAD_REQUEST) {

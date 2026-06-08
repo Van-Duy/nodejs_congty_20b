@@ -1,13 +1,17 @@
 
 const { findAll, findById, createUser, deleteUser, editUser } = require("../services/user.services")
 const { ErrorCustom, BAD_REQUEST_ERROR, UNAUTHORIZED_ERROR } = require("../apps/core/error.res")
+const { Ok } = require("../apps/core/success.res")
+
 
 const getAllUser = async  (req, res) => {
-    let data =  await findAll()
-    res.json({
+    let data = await findAll()
+    new Ok({
         message: "Get All User",
-        data
-    })
+        metadata: {
+            data
+        }
+    }).send(res)
 }
 
 // xoa 
@@ -16,21 +20,20 @@ const getAllUser = async  (req, res) => {
 const getUserById = async (req, res) => {
     const { id } = req.params;
     
-    const data = await findById(id);
-
-    res.json({
-        message: "Get User By Id",
-        data
-    });
+    new Ok({
+        message : "Get User By Id",
+        metadata : {
+            data: await findById(id)
+        }
+    }).send(res)
 }
 
 const addUser = async (req, res) => {
     console.log(req.body)
     await createUser(req.body)
-    res.json({
-        message: "Add User",
-      
-    })
+    new Create({
+
+    }).send(res)
 }
 
 
