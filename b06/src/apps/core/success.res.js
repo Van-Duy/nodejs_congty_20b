@@ -4,7 +4,7 @@ const status_code = require("./statusCode")
 
 
 class SuccessCustom {
-    constructor({message, status = status_code.OK , metadata = {}}){
+    constructor({ message, status = status_code.OK , metadata = {}}){
         this.message = message
         this.status = status
         this.metadata = metadata
@@ -17,12 +17,12 @@ class SuccessCustom {
 
 
 class Ok extends SuccessCustom {
-    constructor({ message, status = status_code.OK, metadata = {} }) {
-        super({ message, status , metadata })
+    constructor({ message, status = status_code.OK , metadata = {} }) {
+        super({ message, status, version ,  metadata })
     }
 }
 class Create extends SuccessCustom {
-    constructor({ message, status = status_code.Create, metadata = {} }) {
+    constructor({ message, status = status_code.CREATED, metadata = {} }) {
         super({ message, status , metadata })
     }
 }

@@ -6,6 +6,10 @@ const findAll = async () => {
     return data
 }
 
+const findUserByUsername = async (username) => {
+    return await UserModel.findOne({ username });
+};
+
 
 const editUser = async (id, userData) => {
     await UserModel.findByIdAndUpdate(id, userData)
@@ -26,4 +30,4 @@ const deleteUser = async (id) => {
     return await UserModel.findByIdAndDelete(id);
 }
 
-module.exports = { findAll, findById, createUser, deleteUser, editUser }
+module.exports = { findAll, findById, createUser, deleteUser, editUser, findUserByUsername }

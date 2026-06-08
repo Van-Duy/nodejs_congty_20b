@@ -25,9 +25,11 @@ app.use((req,res,next) => {
 
 
 app.use((error , req , res , next) => {
-
     console.log("status", error.status)
     console.log("error", error.message)
+
+
+    // check mongdb error
 
     return res.status(error.status || 500).json({
         status: error.status || 500,

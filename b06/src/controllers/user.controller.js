@@ -1,7 +1,7 @@
 
-const { findAll, findById, createUser, deleteUser, editUser } = require("../services/user.services")
+const { findAll, findById, createUser, deleteUser, editUser, findUserByUsername } = require("../services/user.services")
 const { ErrorCustom, BAD_REQUEST_ERROR, UNAUTHORIZED_ERROR } = require("../apps/core/error.res")
-const { Ok } = require("../apps/core/success.res")
+const { Ok, Create } = require("../apps/core/success.res")
 
 
 const getAllUser = async  (req, res) => {
@@ -13,9 +13,6 @@ const getAllUser = async  (req, res) => {
         }
     }).send(res)
 }
-
-// xoa 
-// getOne
 
 const getUserById = async (req, res) => {
     const { id } = req.params;
@@ -29,10 +26,16 @@ const getUserById = async (req, res) => {
 }
 
 const addUser = async (req, res) => {
-    console.log(req.body)
-    await createUser(req.body)
-    new Create({
+    const username = req.body.username;
 
+    const existingUser = await findUserByUsername(username);
+    if (existingUser) throw new BAD_REQUEST_ERROR("User ...")
+
+    await createUser(req.body)
+    
+    new Create({
+        message: "Create User Success",
+        metadata: {}
     }).send(res)
 }
 
@@ -40,6 +43,8 @@ const addUser = async (req, res) => {
 const updateUser = async (req, res) => {
     let { id } = req.params;
     let userData = req.body;
+
+    
 
     if (!id) throw new BAD_REQUEST_ERROR()
     // check id có phải là id của mongdb hay không
