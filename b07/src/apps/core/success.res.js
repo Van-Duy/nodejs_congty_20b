@@ -18,7 +18,7 @@ class SuccessCustom {
 
 class Ok extends SuccessCustom {
     constructor({ message, status = status_code.OK , metadata = {} }) {
-        super({ message, status, version ,  metadata })
+        super({ message, status ,  metadata })
     }
 }
 class Create extends SuccessCustom {

@@ -5,12 +5,9 @@ const { Ok, Create } = require("../apps/core/success.res")
 
 
 const getAllUser = async  (req, res) => {
-    let data = await findAll()
     new Ok({
         message: "Get All User",
-        metadata: {
-            data
-        }
+        metadata: await findAll(req.query)
     }).send(res)
 }
 
