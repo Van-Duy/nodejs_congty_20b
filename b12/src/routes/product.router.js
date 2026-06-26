@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-const { updateItems, getAllItems, addItems, getItemsById, removeItems } = require('../controllers/product.controller')
+const { updateItems, getAllItems, addItems, getItemsById, removeItems, getProductByCategory } = require('../controllers/product.controller')
 const { asyncHandle } = require("../apps/utils/asyncHandle")
 const { checkLogin, checkPermission } = require("../apps/middlewares/auth_middleware")
 
 router.get('/', asyncHandle(getAllItems));
 router.get('/:id', asyncHandle(getItemsById));
+router.get('/:categoryId/allProduct', asyncHandle(getProductByCategory));
 
 router.use(checkLogin)
 router.use(checkPermission)

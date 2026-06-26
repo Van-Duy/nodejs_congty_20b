@@ -2,7 +2,7 @@
 const MainModel = require('../models/product.model')
 
 const findAll = async (
-    { page = 1, limit = 20, status, keyword = "", select = "", isDelete = false }
+    { page = 1, limit = 20, status, keyword = "", select = "", isDelete = false, categoryId = "", is_hot = false }
 ) => {
     let obj = {}
     let skip = (page - 1) * limit
@@ -10,6 +10,13 @@ const findAll = async (
 
     if (status == "active" || status == "inactive") {
         obj.status = status
+    }
+    if (categoryId) {
+        obj.id_category = categoryId
+    }
+
+    if (is_hot) {
+        obj.is_hot = is_hot
     }
 
     if (keyword) {
@@ -59,6 +66,7 @@ const findById = async (id) => {
     return await MainModel.findById(id).populate("id_category")
 }
 
+
 const createUser = async (body) => {
     await MainModel.create(body)
     return true
@@ -70,4 +78,4 @@ const deleteUser = async (id) => {
     })
 }
 
-module.exports = { findOneItem ,  findAll, findById, createUser, deleteUser, editUser, findUserByUsername }
+module.exports = { findOneItem, findAll, findById, createUser, deleteUser, editUser, findUserByUsername }

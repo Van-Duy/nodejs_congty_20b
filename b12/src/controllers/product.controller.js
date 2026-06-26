@@ -21,6 +21,18 @@ const getItemsById = async (req, res) => {
         }
     }).send(res)
 }
+const getProductByCategory = async (req, res) => {
+    const { categoryId } = req.params;
+    
+    new Ok({
+        message: "getProductByCategory",
+        metadata : {
+            data: await findAll({ categoryId , ...req.query})
+        }
+    }).send(res)
+}
+
+
 
 const addItems = async (req, res) => {
     const { name } = req.body
@@ -70,4 +82,4 @@ const removeItems = async (req, res) => {
     });
 }
 
-module.exports = { updateItems, getAllItems, addItems, getItemsById, removeItems }
+module.exports = { updateItems, getAllItems, addItems, getItemsById, removeItems, getProductByCategory }
